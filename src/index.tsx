@@ -6,6 +6,7 @@ import * as React from "react";
 
 import styles from "./styles.css";
 import { WebkitLineClampProperty } from "csstype";
+import Measure from "react-measure";
 
 export type Props = {
   children: object;
@@ -33,24 +34,20 @@ export default class ClampText extends React.Component<Props> {
     textClamped: false
   };
 
-  textRef: React.RefObject<HTMLDivElement>;
+  textRef: HTMLDivElement;
 
-  constructor(props: Props) {
-    super(props);
-    this.textRef = React.createRef<HTMLDivElement>();
-  }
+  setRef = (ref: Element) => {
+    this.textRef = ref as HTMLDivElement;
+  };
 
-  componentDidMount() {
+  handleResize = () => {
     this.updateTextClampedState();
-  }
-
-  componentWillUnmount() {}
+  };
 
   updateTextClampedState = () => {
-    const { current } = this.textRef;
+    const ref = this.textRef;
     const textClamped =
-      (current && current.offsetHeight < current.scrollHeight) ||
-      this.state.allVisible;
+      (ref && ref.offsetHeight < ref.scrollHeight) || this.state.allVisible;
     this.setState({ textClamped });
   };
 
@@ -58,10 +55,11 @@ export default class ClampText extends React.Component<Props> {
     return this.props.showMore && this.state.textClamped;
   }
 
-  handleShowMore = () => this.setState(
-    (prevState: State) => ({ allVisible: !prevState.allVisible }),
-    this.updateTextClampedState,
-  );
+  handleShowMore = () =>
+    this.setState(
+      (prevState: State) => ({ allVisible: !prevState.allVisible }),
+      this.updateTextClampedState
+    );
 
   getShowMoreText(): string {
     const { showMoreText, showLessText } = this.props;
@@ -72,16 +70,22 @@ export default class ClampText extends React.Component<Props> {
     const { children, line } = this.props;
     const { allVisible } = this.state;
 
-    const lineClamp: WebkitLineClampProperty = allVisible ? 'inherit' : line;
+    const lineClamp: WebkitLineClampProperty = allVisible ? "inherit" : line;
     const style = { WebkitLineClamp: lineClamp };
 
     return (
       <React.Fragment>
-        <div className={styles.clampText} style={style} ref={this.textRef}>
-          {children}
-        </div>
+        <Measure bounds onResize={this.handleResize} innerRef={this.setRef}>
+          {({ measureRef }) => (
+            <div className={styles.clampText} style={style} ref={measureRef}>
+              {children}
+            </div>
+          )}
+        </Measure>
         {this.isShowMoreVisible() && (
-          <a href="#" onClick={this.handleShowMore}>{this.getShowMoreText()}</a>
+          <a href="#" onClick={this.handleShowMore}>
+            {this.getShowMoreText()}
+          </a>
         )}
       </React.Fragment>
     );
