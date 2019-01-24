@@ -79,10 +79,15 @@ If both `classes` and `className` are specified, the CSS rules will be merged.
 
 ## Browser Support
 
+Since this component depends on vendor CSS rule `-webkit-line-clamp`, it does not support Firefox currently. See [Can I use...](https://caniuse.com/#search=line-clamp) for details. (compatibility graph by [caniuse.com](https://caniuse.com/) )
+
+![Browser Support](assets/caniuse-line-clamp.png)
+
 ## Limitation
 
 1. This component is implemented with the vendor CSS rule `-webkit-line-clamp` and may stop working when vendors change the implementation.
 2. Animation is not supported.
+3. Firefox is not supported.
 
 ## Contributing
 
