@@ -13,14 +13,26 @@ npm install --save react-clamp-text
 ## Usage
 
 ```tsx
-import * as React from 'react'
-
-import MyComponent from 'react-clamp-text'
+import * as React from 'react';
+import ClampText from 'react-clamp-text';
 
 class Example extends React.Component {
   render () {
     return (
-      <MyComponent />
+      <ClampText
+        line={3}
+        showMore={true}
+        showMoreText="Expand"
+        showLessText="Collapse"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat. Duis aute irure dolor in
+        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+        culpa qui officia deserunt mollit anim id est laborum.
+      </ClampText>
     )
   }
 }
