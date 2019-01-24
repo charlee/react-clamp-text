@@ -4,11 +4,28 @@ import ClampText from "react-clamp-text";
 
 export default class App extends Component {
   render() {
+    const classes = {
+      text: {
+        fontWeight: "bold"
+      },
+
+      button: {
+        display: 'block',
+        marginTop: 16,
+        textDecoration: "none"
+      }
+    };
     return (
       <div>
-        <div>Resize the window smaller to see the "Show More" link.</div>
-        <div style={{ border: "1px solid #000", padding: 16 }}>
-          <ClampText>
+        <p>Resize the window smaller to see the "Show More" link.</p>
+        <div className="container">
+          <ClampText
+            line={4}
+            showMoreText="Expand"
+            showLessText="Collapse"
+            className="text"
+            classes={classes}
+          >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut

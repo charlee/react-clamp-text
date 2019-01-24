@@ -38,6 +38,44 @@ class Example extends React.Component {
 }
 ```
 
+## Custom Styling
+
+There are two ways of assigning custom CSS rules to `<ClampText/>`.
+
+`className` can be used to specify a custom class name. This class will be applied to the text itsef.
+
+```tsx
+// style.css
+.myText {
+  color: red;
+}
+
+// React
+import classes from './style.css';
+
+return <ClampText className={classes.myText} />;
+```
+
+Another way is using `classes` property. This property consists of two key-value pairs:
+- `text`: CSS rules that will be applied to the text.
+- `button`: CSS rules that will be applied to the "Show More" button.
+
+```tsx
+const classes = {
+  text: {
+    fontWeight: 'bold',
+  },
+  button: {
+    color: 'red',
+    marginTop: 16,
+  }
+};
+return <ClampText classes={classes} />;
+```
+
+If both `classes` and `className` are specified, the CSS rules will be merged.
+
+
 ## License
 
 MIT © [charlee](https://github.com/charlee)

@@ -4,6 +4,7 @@
 
 import * as React from "react";
 
+import classNames from "classnames";
 import styles from "./styles.css";
 import { WebkitLineClampProperty } from "csstype";
 import Measure from "react-measure";
@@ -14,6 +15,8 @@ export type Props = {
   showMore: boolean;
   showMoreText: string;
   showLessText: string;
+  className: string;
+  classes: { [key: string]: object };
 };
 
 type State = {
@@ -26,7 +29,9 @@ export default class ClampText extends React.Component<Props> {
     line: 3,
     showMore: true,
     showMoreText: "Show More",
-    showLessText: "Show Less"
+    showLessText: "Show Less",
+    className: "",
+    classes: {},
   };
 
   state: State = {
@@ -67,23 +72,27 @@ export default class ClampText extends React.Component<Props> {
   }
 
   render() {
-    const { children, line } = this.props;
+    const { children, line, className, classes } = this.props;
     const { allVisible } = this.state;
 
     const lineClamp: WebkitLineClampProperty = allVisible ? "inherit" : line;
-    const style = { WebkitLineClamp: lineClamp };
+    const style = { WebkitLineClamp: lineClamp, ...classes.text };
 
     return (
       <React.Fragment>
         <Measure bounds onResize={this.handleResize} innerRef={this.setRef}>
           {({ measureRef }) => (
-            <div className={styles.clampText} style={style} ref={measureRef}>
+            <div
+              className={classNames(styles.clampText, className)}
+              style={style}
+              ref={measureRef}
+            >
               {children}
             </div>
           )}
         </Measure>
         {this.isShowMoreVisible() && (
-          <a href="#" onClick={this.handleShowMore}>
+          <a href="#" onClick={this.handleShowMore} style={classes.button}>
             {this.getShowMoreText()}
           </a>
         )}
