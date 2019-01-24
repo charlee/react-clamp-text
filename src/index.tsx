@@ -26,11 +26,22 @@ type State = {
 
 export default class ClampText extends React.Component<Props> {
   static defaultProps = {
+    /** Number of lines after clampping. */
     line: 3,
+
+    /** Whether to show "Show More" link. */
     showMore: true,
+
+    /** Customize the text for the "Show More" link. */
     showMoreText: "Show More",
+
+    /** Customize the text for the "Show Less" link. */
     showLessText: "Show Less",
+
+    /** Customize the style of the text. */
     className: "",
+
+    /** Customize the style of the text and the "Show More" link. */
     classes: {},
   };
 
@@ -39,16 +50,26 @@ export default class ClampText extends React.Component<Props> {
     textClamped: false
   };
 
+  /**
+   * Reference to the text element to allow clamp state detection.
+   */
   textRef: HTMLDivElement;
 
   setRef = (ref: Element) => {
     this.textRef = ref as HTMLDivElement;
   };
 
+  /**
+   * When text element size changes, recalculate the clamp state.
+   */
   handleResize = () => {
     this.updateTextClampedState();
   };
 
+  /**
+   * Detect the clamp state of the text to decide
+   * whether to show or hide the "Show More" link.
+   */
   updateTextClampedState = () => {
     const ref = this.textRef;
     const textClamped =

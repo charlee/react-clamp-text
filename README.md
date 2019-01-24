@@ -4,6 +4,8 @@
 
 [![NPM](https://img.shields.io/npm/v/react-clamp-text.svg)](https://www.npmjs.com/package/react-clamp-text) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+![react-clamp-text](assets/react-clamp-text.gif)
+
 ## Install
 
 ```bash
@@ -75,6 +77,16 @@ return <ClampText classes={classes} />;
 
 If both `classes` and `className` are specified, the CSS rules will be merged.
 
+## Browser Support
+
+## Limitation
+
+1. This component is implemented with the vendor CSS rule `-webkit-line-clamp` and may stop working when vendors change the implementation.
+2. Animation is not supported.
+
+## Contributing
+
+Read the [Contributing Guide](CONTRIBUTE.md).
 
 ## License
 

@@ -6,7 +6,7 @@ export default class App extends Component {
   render() {
     const classes = {
       text: {
-        fontWeight: "bold"
+        fontWeight: 200
       },
 
       button: {
