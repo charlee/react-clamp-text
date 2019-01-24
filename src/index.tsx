@@ -10,7 +10,7 @@ import { WebkitLineClampProperty } from "csstype";
 import Measure from "react-measure";
 
 export type Props = {
-  children: object;
+  children: any;
   line: number;
   showMore: boolean;
   showMoreText: string;
